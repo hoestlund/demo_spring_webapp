@@ -1,4 +1,9 @@
 HELP.md
+
+# personal note taking
+learning.md
+topics.md
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
