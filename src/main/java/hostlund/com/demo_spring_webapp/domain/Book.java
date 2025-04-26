@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,11 +16,12 @@ public class Book {
   @GeneratedValue
   private int id;
   private String title;
+  private String isbn;
 
   @ManyToMany
   @JoinTable(name="author_book", joinColumns = @JoinColumn(name="author_id"), inverseJoinColumns =
   @JoinColumn(name="book_id"))
-  private Set<Author> authors;
+  private Set<Author> authors = new HashSet<>();
 
   public int getId() {
     return id;
@@ -50,6 +52,7 @@ public class Book {
     return "Book{" +
         "id=" + id +
         ", title='" + title + '\'' +
+        ", isbn=" + isbn +
         ", authors=" + authors +
         '}';
   }
@@ -71,5 +74,13 @@ public class Book {
   @Override
   public int hashCode() {
     return getId();
+  }
+
+  public String getIsbn() {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn) {
+    this.isbn = isbn;
   }
 }
