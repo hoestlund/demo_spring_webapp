@@ -1,6 +1,7 @@
 package hostlund.com.demo_spring_webapp.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -15,8 +16,21 @@ public class Author {
   private int id;
   private String name;
 
-  @ManyToMany
+  //TODO readup https://www.baeldung.com/hibernate-initialize-proxy-exception
+  //®@ManyToMany
+  @ManyToMany(fetch= FetchType.EAGER)
   private Set<Book> books = new HashSet<>();
+
+  public Author(){
+  }
+  public Author(String name) {
+    this.name = name;
+  }
+
+  public Author(String name, HashSet<Book> books) {
+    this.name = name;
+    this.books = books;
+  }
 
   public int getId() {
     return id;

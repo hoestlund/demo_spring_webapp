@@ -1,6 +1,7 @@
 package hostlund.com.demo_spring_webapp.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -18,10 +19,29 @@ public class Book {
   private String title;
   private String isbn;
 
-  @ManyToMany
+  //TODO readup https://www.baeldung.com/hibernate-initialize-proxy-exception)
+  //@ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name="author_book", joinColumns = @JoinColumn(name="author_id"), inverseJoinColumns =
   @JoinColumn(name="book_id"))
   private Set<Author> authors = new HashSet<>();
+
+  public Book() {
+  }
+  public Book(String title) {
+    this.title = title;
+  }
+
+  public Book(String title, String isbn) {
+    this.title = title;
+    this.isbn = isbn;
+  }
+
+  public Book(String title, String isbn, Set<Author> authors) {
+    this.title = title;
+    this.isbn = isbn;
+    this.authors = authors;
+  }
 
   public int getId() {
     return id;
