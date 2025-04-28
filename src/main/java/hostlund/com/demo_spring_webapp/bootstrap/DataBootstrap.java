@@ -41,10 +41,13 @@ public class DataBootstrap implements CommandLineRunner {
     Author martin = authorRepository.save(new Author("Martin Kleppmann"));
 
     dataIntensive.getAuthors().add(martin);
-    bookRepository.save(dataIntensive);
+    dataIntensive = bookRepository.save(dataIntensive);
 
     publisher.getPublishedTitles().add(dataIntensive);
     publisherRepository.save(publisher);
+
+    dataIntensive.setPublisher(publisher);
+    bookRepository.save(dataIntensive);
   }
 
   private void createTwoAuthorsSameBook() {
@@ -53,6 +56,7 @@ public class DataBootstrap implements CommandLineRunner {
 
     Author david = new Author("David Thomas");
     david = authorRepository.save(david);
+
 
     Book pragmatic = bookRepository.save(new Book("The Pragmatic Programmer", "99999",
         Stream.of(andrew, david).collect(
@@ -63,6 +67,13 @@ public class DataBootstrap implements CommandLineRunner {
 
     david.getBooks().add(pragmatic);
     authorRepository.save(david);
+
+    Publisher publisher = new Publisher("Addison-Wesley Longman", "Amsterdam, Netherlands");
+    publisher = publisherRepository.save(publisher);
+    publisher.getPublishedTitles().add(pragmatic);
+
+    pragmatic.setPublisher(publisher);
+    bookRepository.save(pragmatic);
   }
 
   private void createArthurWithTwoBooks() {
@@ -77,6 +88,14 @@ public class DataBootstrap implements CommandLineRunner {
     arthurSaved.getBooks().add(hound);
     arthurSaved = authorRepository.save(arthur);
 
+    Publisher publisher = new Publisher("Harper & Brother", "NYC, NY, USA");
+    publisher = publisherRepository.save(publisher);
+    publisher.getPublishedTitles().add(hound);
+
+    hound.setPublisher(publisher);
+    bookRepository.save(hound);
+
+//TODO add
     //Unique index or primary key violation: "PUBLIC.PRIMARY_KEY_E ON PUBLIC.AUTHOR_BOOKS
 //   Book sherlock = new Book();
 //    sherlock.setTitle("The Adventures of Sherlock Holmes");
