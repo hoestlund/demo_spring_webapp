@@ -23,8 +23,8 @@ public class Book {
   //TODO readup https://www.baeldung.com/hibernate-initialize-proxy-exception)
   //@ManyToMany
   @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns =
-  @JoinColumn(name = "book_id"))
+  @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns =
+  @JoinColumn(name = "author_id"))
   private Set<Author> authors = new HashSet<>();
   @ManyToOne
   private Publisher publisher;

@@ -17,7 +17,7 @@ public class Publisher {
   private String name;
   private String hqLocation;
 
-  @OneToMany(fetch = FetchType.EAGER)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "publisher")
   private Set<Book> publishedTitles = new HashSet<>();
 
   public Publisher() {
