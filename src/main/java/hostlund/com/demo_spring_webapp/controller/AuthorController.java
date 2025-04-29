@@ -17,16 +17,16 @@ public class AuthorController {
   @RequestMapping("/authors")
   public String getAuthors(Model model){
     model.addAttribute("authors",authorService.findAll());
-    return "books";
+    return "authors";
   }
 
   //TODO see what I could do to return one specific book
   // Would involve the service and getting everything after the book/*
-  @RequestMapping("/book/")
+  @RequestMapping("/authors/")
   public String getAuthor(Model model) {
     //TODO how do I pass the attribute and use this for the service
     //TODO read up on the Model and what it is capable of
-    return "book";
+    return "author";
   }
 
 }

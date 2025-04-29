@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Looking at authors</title>
+</head>
+<body>
+<h1>Author List</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <!--<th>Publisher</th>-->
+  </tr>
+  <tr th:each="author : ${authors}">
+    <td th:text="${author.id}">Dummy id</td>
+    <td th:text="${author.name}"> Dummy title</td>
+    <!--TODO not sure how to display books in the best way, look into how to split the row-->
+  </tr>
+
+</table>
+</body>
+</html>
