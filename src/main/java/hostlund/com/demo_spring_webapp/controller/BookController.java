@@ -13,8 +13,6 @@ public class BookController {
   public BookController(BookService bookService) {
     this.bookService = bookService;
   }
-
-  //jakarta.servlet.ServletException: Circular view path [books]: would dispatch back to the current handler URL [/books] again. Check your ViewResolver setup! (Hint: This may be the result of an unspecified view, due to default view name generation.)
   @RequestMapping("/books")
   public String getBook(Model model) {
     model.addAttribute("books",bookService.findAll());
